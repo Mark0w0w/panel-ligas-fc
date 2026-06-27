@@ -4,8 +4,8 @@ import { db } from '../firebaseConfig';
 export const logAction = async (
   adminEmail: string | null | undefined,
   adminRole: string | null | undefined,
-  action: 'CREAR' | 'EDITAR' | 'ELIMINAR' | 'LOGIN',
-  target: 'Usuario' | 'Administrador' | 'Liga' | 'Transferencia' | 'Sistema',
+  action: 'CREAR' | 'EDITAR' | 'ELIMINAR' | 'LOGIN' | 'MODIFICAR',
+  target: 'Usuario' | 'Administrador' | 'Liga' | 'Transferencia' | 'Sistema' | 'Backup' | 'Torneo',
   details: string
 ) => {
   if (!adminEmail) return;

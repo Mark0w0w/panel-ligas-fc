@@ -20,6 +20,7 @@ export interface TransferRequest {
   origenLigaId: string;
   destinoLigaId: string;
   status: 'pendiente' | 'aprobada' | 'rechazada';
+  tipo?: string;
   requestedBy: string;
   createdAt: any;
 }
@@ -31,5 +32,6 @@ export interface TournamentRequest {
   ligaId: string;
   fecha: string; // YYYY-MM-DD
   status: 'pendiente' | 'aprobada' | 'rechazada';
+  tipo?: string;
   createdAt: any;
 }

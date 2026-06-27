@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import type { Jugador } from '../types';
@@ -14,7 +14,7 @@ interface PublicWeeklyActivityProps {
 type SortField = 'nombre' | 'grl' | 'uid';
 type SortDirection = 'asc' | 'desc';
 
-export default function PublicWeeklyActivity({ ligaId, ligaNombre, metaSemanal = 0, players }: PublicWeeklyActivityProps) {
+export default function PublicWeeklyActivity({ ligaId,  metaSemanal = 0, players }: PublicWeeklyActivityProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchColumn, setSearchColumn] = useState<string>('all');
   const [sortField, setSortField] = useState<SortField>('nombre');

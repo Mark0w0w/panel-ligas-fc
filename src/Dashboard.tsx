@@ -426,7 +426,7 @@ export default function Dashboard() {
                       <h3 className="table-card-title">Historial de Actividad Reciente</h3>
                     </div>
                     <div className="p-0">
-                      <HistoryLog hideHeader={true} />
+                      <HistoryLog  />
                     </div>
                   </div>
                 </div>
@@ -492,7 +492,7 @@ export default function Dashboard() {
                   {activeTab === 'historial' && (
                     <div className="card p-0">
                       <div className="p-6 pb-0 border-b border-[var(--border)]"><h3 className="card-title">Historial de la Liga</h3></div>
-                      <HistoryLog hideHeader={true} />
+                      <HistoryLog  />
                     </div>
                   )}
                 </div>

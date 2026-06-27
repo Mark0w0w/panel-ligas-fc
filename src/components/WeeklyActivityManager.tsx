@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { doc, updateDoc, collection, query, where, onSnapshot, deleteDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import type { Jugador } from '../types';
@@ -16,7 +16,7 @@ type StatusType = 'logrado' | 'no_logrado' | 'reciente';
 type SortField = 'nombre' | 'grl' | 'uid';
 type SortDirection = 'asc' | 'desc';
 
-export default function WeeklyActivityManager({ ligaId, ligaNombre, metaSemanal = 0, players }: WeeklyActivityManagerProps) {
+export default function WeeklyActivityManager({ ligaId,  metaSemanal = 0, players }: WeeklyActivityManagerProps) {
   const [editingMeta, setEditingMeta] = useState(false);
   const [tempMeta, setTempMeta] = useState(metaSemanal.toString());
   const [searchTerm, setSearchTerm] = useState('');

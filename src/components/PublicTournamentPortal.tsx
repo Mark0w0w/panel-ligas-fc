@@ -15,7 +15,7 @@ export default function PublicTournamentPortal() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchColumn, setSearchColumn] = useState<string>('all');
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'torneo' | 'actividad'>('torneo');
+  const [activeTab, setActiveTab] = useState<'torneo' | 'actividad' | 'historial_general' | 'rendimiento'>('torneo');
 
   const getTodayStr = () => {
     const d = new Date();
@@ -1071,7 +1071,7 @@ export default function PublicTournamentPortal() {
                                     </td>
                                     <td className="px-5 py-4 text-right">
                                       <button 
-                                        onClick={() => handleRequestReview(p, t.fecha)} 
+                                        onClick={() => p && handleRequestReview(p, t.fecha)} 
                                         className="px-3 py-1.5 text-xs font-bold bg-slate-700/50 hover:bg-slate-700 text-slate-300 rounded-lg border border-slate-600 transition-colors shadow-sm"
                                         title="Solicitar revisión de asistencia"
                                       >
