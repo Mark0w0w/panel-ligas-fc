@@ -1,0 +1,74 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Función para verificar si el usuario está logueado
+    function isAuth() {
+      return request.auth != null;
+    }
+
+    // Función para verificar si el usuario es un SuperAdmin
+    function isSuperAdmin() {
+      return isAuth() && get(/databases/$(database)/documents/usuarios_admin/$(request.auth.uid)).data.role == 'superadmin';
+    }
+
+    // Función para verificar si el usuario es cualquier Admin o SuperAdmin
+    function isAdminOrSuper() {
+      return isAuth() && exists(/databases/$(database)/documents/usuarios_admin/$(request.auth.uid));
+    }
+
+    // -----------------------------------------------------
+    // COLECCIONES 100% PRIVADAS (Solo Administradores)
+    // -----------------------------------------------------
+    
+    match /usuarios_admin/{userId} {
+      allow read, write: if isSuperAdmin();
+    }
+    
+    match /logs/{logId} {
+      allow read: if isSuperAdmin();
+      allow write: if isAdminOrSuper();
+    }
+    
+    match /backups/{backupId} {
+      allow read, write: if isSuperAdmin();
+    }
+    
+    match /jugadores_eliminados/{docId} {
+      allow read, write: if isSuperAdmin();
+    }
+
+    // -----------------------------------------------------
+    // COLECCIONES MIXTAS (Portal Público vs Admin)
+    // -----------------------------------------------------
+
+    match /ligas/{ligaId} {
+      allow read: if true; 
+      allow write: if isSuperAdmin();
+    }
+
+    match /jugadores/{jugadorId} {
+      allow read: if true;
+      allow write: if isAdminOrSuper();
+    }
+
+    match /torneos_diarios/{torneoId} {
+      allow read: if true;
+      allow write: if isAdminOrSuper();
+    }
+
+    match /solicitudes_torneo/{solicitudId} {
+      allow create: if true;
+      allow read, update, delete: if isAdminOrSuper();
+    }
+    
+    match /revisiones_actividad/{revisionId} {
+      allow create: if true;
+      allow read, update, delete: if isAdminOrSuper();
+    }
+    
+    match /transferencias/{transfId} {
+      allow read, write: if isAdminOrSuper();
+    }
+  }
+}
